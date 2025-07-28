@@ -61,7 +61,6 @@ const getAllOrders = async (req, res) => {
 const getOrdersByUser = async (req, res) => {
     try{
         const userId = req.params.id;
-        console.log(userId);
         const orders = await Order.find({user: userId});
         res.status(200).json(orders);
     }catch(error){
