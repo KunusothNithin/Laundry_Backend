@@ -7,12 +7,14 @@ const {
     placeOrder,
     getAllOrders,
     getOrdersByUser,
-    updateOrderStatus
+    updateOrderStatus,
+    getOrderStatus
 } = require('../controllers/orderController');
 
-router.post('/',protect,placeOrder);
-router.get('/', protect, adminOnly,getAllOrders);
-router.get('/user/:id',protect,getOrdersByUser);
-router.put('/:id',protect,updateOrderStatus);
+router.post('/placeOrder',protect,placeOrder);
+router.get('/allOrders', protect, adminOnly,getAllOrders);
+router.get('/orderByUser/:id',protect,getOrdersByUser);
+router.get('/orderStatus/:id',protect,getOrderStatus);
+router.put('/updateStatus/:id',protect,adminOnly,updateOrderStatus);
 
 module.exports = router;

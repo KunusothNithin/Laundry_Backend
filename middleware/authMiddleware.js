@@ -3,15 +3,13 @@ const User = require('../models/User');
 
 const protect = async (req, res,next) => {
     let token = req.headers.authorization;
-    // console.log("Authorization Header:", req.headers.authorization);
 
     if(token && token.startsWith('Bearer')){
         try{
             token = token.split(' ')[1];
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            console.log("Decoded JWT:", decoded);
+            
             const user = await User.findById(decoded.id).select('-password');
-            console.log("User Found:", user);
 
             if (!user) {
         return res.status(401).json({ message: "User not found in DB" });
